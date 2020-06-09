@@ -33,6 +33,9 @@ class Hero(Character):
     def alive(self):
         hero_health > 0
 
+    def print_status(self):
+        print("You have {} health and {} power.".format(hero_health, hero_power))
+
 # One of the childer is Goblin. Hero is a child of Character due to universal attributes of a character. 
 class Goblin(Character):
     # Creating a constructor
@@ -51,6 +54,10 @@ class Goblin(Character):
     def alive(self):
     goblin_health > 0     
 
+    def print_status(self):
+        print("The goblin has {} health and {} power.".format(
+        goblin_health, goblin_power))
+
 # hero = Hero(10, 5)
 # hero.health() 
 # hero.power()
@@ -64,9 +71,11 @@ class Goblin(Character):
         goblin = Goblin()
 
         while goblin.alive and hero.alive():
-            print("You have {} health and {} power.".format(hero_health, hero_power))
-            print("The goblin has {} health and {} power.".format(
-                goblin_health, goblin_power))
+            hero.print_status()
+            goblin.print_status()
+            # print("You have {} health and {} power.".format(hero_health, hero_power))
+            # print("The goblin has {} health and {} power.".format(
+            #     goblin_health, goblin_power))
             print()
             print("What do you want to do?")
             print("1. fight goblin")
