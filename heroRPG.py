@@ -71,8 +71,8 @@ class Goblin(Character):
         goblin = Goblin()
 
         while goblin.alive and hero.alive():
-            hero.print_status()
-            goblin.print_status()
+            hero.print_status(Hero)
+            goblin.print_status(Goblin)
             # print("You have {} health and {} power.".format(hero_health, hero_power))
             # print("The goblin has {} health and {} power.".format(
             #     goblin_health, goblin_power))
