@@ -11,9 +11,12 @@ class Character():
     # Creating a constructor
     def __init__(self, health, power):
         # Adding instance variables
-        self.health = health
-        self.power = power 
+        # self.health = health
+        # self.power = power 
 
+    def alive(self):
+    hero_health > 0
+    goblin_health > 0  
 
 # One of the children is Hero. Hero is a child of Character due to universal attributes of a character. 
 class Hero(Character):
@@ -30,8 +33,8 @@ class Hero(Character):
         if goblin_health <= 0:
         print("The goblin is dead.")
 
-    def alive(self):
-        hero_health > 0
+    # def alive(self):
+    #     hero_health > 0
 
     def print_status(self):
         print("You have {} health and {} power.".format(hero_health, hero_power))
@@ -51,8 +54,8 @@ class Goblin(Character):
         if hero_health <= 0:
             print("You are dead.")   
 
-    def alive(self):
-    goblin_health > 0     
+    # def alive(self):
+    # goblin_health > 0     
 
     def print_status(self):
         print("The goblin has {} health and {} power.".format(
