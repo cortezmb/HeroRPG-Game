@@ -6,29 +6,56 @@
 # 2. do nothing - in which case the goblin will attack him anyway
 # 3. flee
 
-# Parent is Character. This will us to add more characters in addition to Hero and Goblin
-class Character(): 
-    # Creating a constructor
-    def __init__(self, health, power):
-        # Adding instance variables
-        self.health = health
-        self.power = power 
+# Parent is Character. This will allow us to add more characters in addition to Hero and Goblin
+# class Character(): 
+#     # Creating a constructor
+#     def __init__(self, health, power):
+#         # Adding instance variables
+#         self.health = health
+#         self.power = power 
 
 
 # One of the children is Hero. Hero is a child of Character due to universal attributes of a character. 
-class Hero(Character):
-    def __init__(self, health, power):
+class Hero():
+    # Creating a constructor
+    def __init__(self):
+       self.hero_health = 10
+       self.hero_power = 5
+    
+    # Creating a method for Hero attacking the Goblin
+    def attack(self, Goblin):
+        # goblin_health -= hero_power
+        goblin.health -= hero.power
+        print("You do {} damage to the goblin.".format(hero_power))
+        if goblin_health <= 0:
+        print("The goblin is dead.")
         
 # One of the childer is Goblin. Hero is a child of Character due to universal attributes of a character. 
-class Goblin(Character):
-    def __init__(self, health, power):
+class Goblin():
+    # Creating a constructor
+    def __init__(self):
+        self.goblin_health = 6
+        self.goblin_power = 2
+
+    # Creating a method for Hero attacking the Goblin
+    def attack(self, Hero):
+        # hero_health -= goblin_power
+        hero.health -= goblin.power 
+        print("The goblin does {} damage to you.".format(goblin_power))
+        if hero_health <= 0:
+            print("You are dead.")   
+
+# hero = Hero(10, 5)
+# hero.health() 
+# hero.power()
+
+# goblin = Goblin(6, 2)
+# goblin.health()
+# goblin.power()
     
-    #
     def main():
-        hero_health = 10
-        hero_power = 5
-        goblin_health = 6
-        goblin_power = 2
+        hero = Hero() 
+        goblin = Goblin()
 
         while goblin_health > 0 and hero_health > 0:
             print("You have {} health and {} power.".format(hero_health, hero_power))
@@ -42,11 +69,12 @@ class Goblin(Character):
             print("> ", end=' ')
             raw_input = input()
             if raw_input == "1":
+                hero.attack(Goblin)
                 # Hero attacks goblin
-                goblin_health -= hero_power
-                print("You do {} damage to the goblin.".format(hero_power))
-                if goblin_health <= 0:
-                    print("The goblin is dead.")
+                # goblin_health -= hero_power
+                # print("You do {} damage to the goblin.".format(hero_power))
+                # if goblin_health <= 0:
+                #     print("The goblin is dead.")
             elif raw_input == "2":
                 pass
             elif raw_input == "3":
@@ -57,10 +85,11 @@ class Goblin(Character):
 
             if goblin_health > 0:
                 # Goblin attacks hero
-                hero_health -= goblin_power
-                print("The goblin does {} damage to you.".format(goblin_power))
-                if hero_health <= 0:
-                    print("You are dead.")
+                # hero_health -= goblin_power
+                # print("The goblin does {} damage to you.".format(goblin_power))
+                # if hero_health <= 0:
+                #     print("You are dead.")
+                goblin.attack(Hero)
 
 
 main()
