@@ -7,16 +7,16 @@
 # 3. flee
 
 # Parent is Character. This will allow us to add more characters in addition to Hero and Goblin
-# class Character(): 
-#     # Creating a constructor
-#     def __init__(self, health, power):
-#         # Adding instance variables
-#         self.health = health
-#         self.power = power 
+class Character(): 
+    # Creating a constructor
+    def __init__(self, health, power):
+        # Adding instance variables
+        self.health = health
+        self.power = power 
 
 
 # One of the children is Hero. Hero is a child of Character due to universal attributes of a character. 
-class Hero():
+class Hero(Character):
     # Creating a constructor
     def __init__(self):
        self.hero_health = 10
@@ -34,7 +34,7 @@ class Hero():
         hero_health > 0
 
 # One of the childer is Goblin. Hero is a child of Character due to universal attributes of a character. 
-class Goblin():
+class Goblin(Character):
     # Creating a constructor
     def __init__(self):
         self.goblin_health = 6
