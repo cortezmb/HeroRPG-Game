@@ -6,8 +6,14 @@
 # 2. do nothing - in which case the Goblin will attack him anyway
 # 3. flee
 
+# Character class that will be the parent of Hero and Goblin
+class Character:
+    def __init__(self, health, power):
+        self.health = health
+        self.power = power
+
 # Hero class that stores health and power
-class Hero:
+class Hero(Character):
     def __init__(self, health, power):
         self.health = health
         self.power = power
@@ -34,7 +40,7 @@ class Hero:
         else:
             return main()
 
-class Goblin:
+class Goblin(Character):
     def __init__(self, health, power):
         self.health = health
         self.power = power 
