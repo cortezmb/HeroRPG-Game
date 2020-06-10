@@ -29,45 +29,25 @@ class Character:
             print(f"The {self.character_name} does {self.power} damage to you.")      
         return main()
 
+    def print_status(self, enemy):
+        if self.alive_name == "hero":
+            print(f"You have {self.health} health and {self.power} power.")
+        if self.alive_name == "goblin":
+             print(f"The {enemy.character_name} has {enemy.health} health and {enemy.power} power.") 
+
 # Hero class that stores health and power
 class Hero(Character):
     def __init__(self, health, power):
         self.character_name = "hero"
         #Why and when is this needed?
         super(Hero, self).__init__(health, power)
-    # def attack(self):
-    #     # Hero attacks goblin
-    #     goblin.health -= hero.power
-    #     print("You do {} damage to the goblin.".format(hero.power))
-    #     if goblin.health <= 0:
-    #         print("The goblin is dead.")
-    #     else:
-    #         return main()
-
-    def print_status(self):
-        if self.alive():
-            print(f"You have {hero.health} health and {hero.power} power.")
-        else:
-            return main()
+        self.alive_name = "hero"
 
 class Goblin(Character):
     def __init__(self, health, power):
         self.character_name = "goblin"
         super(Goblin, self).__init__(health, power)
-    # def attack(self):
-    #     # Goblin attacking Hero
-    #     hero.health -= goblin.power
-    #     print("The goblin does {} damage to you.".format(goblin.power))
-    #     if hero.health <= 0:
-    #         print("You are dead.")
-    #     else:
-    #         return main()
-
-    def print_status(self):
-        if self.alive():
-           print(f"The goblin has {goblin.health} health and {goblin.power} power.") 
-        else:
-            return main()
+        self.alive_name = "goblin"
 
 hero = Hero(10, 5)
 goblin = Goblin(6, 2)
@@ -75,8 +55,8 @@ goblin = Goblin(6, 2)
 def main():
 
     while goblin.alive() and hero.alive():
-        hero.print_status() 
-        goblin.print_status()
+        hero.print_status(hero) 
+        goblin.print_status(goblin)
         print()
         print("What do you want to do?")
         print("1. fight goblin")
@@ -95,10 +75,6 @@ def main():
             break
         else:
             print("Invalid input {}".format(raw_input))
-        # if goblin.alive():
-        #     # Goblin attacks hero
-        #     return goblin.attack(hero)
-        # else:
             return False
 
 main()
