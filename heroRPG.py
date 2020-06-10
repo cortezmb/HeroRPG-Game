@@ -12,11 +12,15 @@ class Character:
         self.health = health
         self.power = power
 
+    def alive(self):
+        # Since I am in the Hero class, I use self.health
+        if self.health > 0:
+            return True
+        else: 
+            return False
+
 # Hero class that stores health and power
 class Hero(Character):
-    def __init__(self, health, power):
-        self.health = health
-        self.power = power
 
     def attack(self):
         # Hero attacks goblin
@@ -27,13 +31,6 @@ class Hero(Character):
         else:
             return main()
 
-    def alive(self):
-        # Since I am in the Hero class, I use self.health
-        if self.health > 0:
-            return True
-        else: 
-            return False
-
     def print_status(self):
         if self.alive():
             print("You have {} health and {} power.".format(hero.health, hero.power))
@@ -41,9 +38,6 @@ class Hero(Character):
             return main()
 
 class Goblin(Character):
-    def __init__(self, health, power):
-        self.health = health
-        self.power = power 
 
     def attack(self):
         # Goblin attacking Hero
@@ -53,13 +47,6 @@ class Goblin(Character):
             print("You are dead.")
         else:
             return main()
-
-    # Every method has a self parameter
-    def alive(self):
-        if self.health > 0:
-            return True
-        else: 
-            return False
 
     def print_status(self):
         if self.alive():
