@@ -5,14 +5,20 @@
 # 1. fight Goblin
 # 2. do nothing - in which case the Goblin will attack him anyway
 # 3. flee
+
+# Import random.py module
 import random
 
+chance_double = random.randint(1, 10)
 # Character class that will be the parent of Hero and Goblin
 class Character:
+
+
     def __init__(self, health, power):
         self.health = health
         self.power = power
-
+        self.power_double = self.power * 2  
+    
     def alive(self):
         if self.health > 0:
             return True
@@ -25,11 +31,9 @@ class Character:
         chance_double = random.randint(1, 10)
         if self.character_name == "hero":
             if chance_double == 2:
-                self.power = self.power * 2  
-                print(f"You do {self.power} damage to the {enemy.character_name}.")
+                print(f"You do {self.power_double} damage to the {enemy.character_name}.")
                 return main()
             else:
-                self.power !=  self.power * 2
                 print(f"You do {self.power} damage to the {enemy.character_name}.")                       
             if enemy.health <= 0:
                 print(f"The {enemy.character_name} is dead.")
@@ -38,22 +42,40 @@ class Character:
         #Goblin attacks Hero
         if self.character_name == "goblin":
             print(f"The {self.character_name} does {self.power} damage to you.")
-        #    return main()
+            if enemy.health <= 0:
+                print(f"The {enemy.character_name} is dead.")
+            return main()
+
+        #Goblin attacks medic
+        if enemy.character_name == "medic":
+            if chance_double == 2:
+                print(f"The {self.character_name} does {self.power} damage to you.")
+        return main()
 
     def print_status(self, enemy):
-      
+        self.power_double = self.power * 2 
+
         #Health and power status of Hero
         if self.character_name == "hero":
             print(f"You have {self.health} health and {self.power} power.")
 
-         #Health and power status of Goblin
-        chance_double = random.randint(1, 10)
-        if self.character_name == "goblin":
+        #Health and power status of Goblin
+        
+        if self.character_name == "goblin": 
+            if self.power_double == True:
+                enemy.health_half = enemy.health / 2     
+                print(f"The {enemy.character_name} has {enemy.health_half} health and {enemy.power} power.")
+            else:
+                print(f"The {enemy.character_name} has {enemy.health} health and {enemy.power} power.")
+
+        #Health and power status of Medic
+        if self.character_name == "medic":
+            chance_double = random.randint(1, 10)
             if chance_double == 2:
-                enemy.health = enemy.health / 2     
+                enemy.health = enemy.health + 2
                 print(f"The {enemy.character_name} has {enemy.health} health and {enemy.power} power.")
             else:
-                enemy.health != enemy.health / 2
+                enemy.health != enemy.health + 2
                 print(f"The {enemy.character_name} has {enemy.health} health and {enemy.power} power.")
 
 # Hero class that stores health and power
@@ -62,13 +84,16 @@ class Hero(Character):
         self.character_name = "hero"
         # Manually call the constructor in base class. Then pass in health and power. 
         super(Hero, self).__init__(health, power)
+        
 
+# Goblin class that stores health and power
 class Goblin(Character):
     def __init__(self, health, power):
         self.character_name = "goblin"
         super(Goblin, self).__init__(health, power)
         self.alive_name = "goblin"
 
+# Medic class that stores health and power
 class Medic(Character):
     def __init__(self, health, power):
         # Manually call the constructor in base class. Then pass in health and power. 
@@ -78,14 +103,14 @@ class Medic(Character):
 
 hero = Hero(10, 1)
 goblin = Goblin(10, 1)
-medic = Medic(10, 5)
+medic = Medic(10, 1)
 
 def main():
 
-    while goblin.alive() and hero.alive():
+    while goblin.alive() and hero.alive() and medic.alive():
         hero.print_status(hero) 
         goblin.print_status(goblin)
-        medic.print_status(goblin)
+        medic.print_status(medic)
         print()
         print("What do you want to do?")
         print("1. fight goblin")
@@ -94,9 +119,11 @@ def main():
         print("> ", end='')
         raw_input = input()
         if raw_input == "1":
+
             # Hero attacks goblin
             return hero.attack(goblin)
         elif raw_input == "2":
+
             #Goblin attacks Hero
             return goblin.attack(hero)
         elif raw_input == "3":
